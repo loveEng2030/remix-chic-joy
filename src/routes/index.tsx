@@ -138,7 +138,7 @@ function Home() {
 
       {/* Discover */}
       <section className="mx-auto max-w-6xl px-4 py-5 md:py-7">
-        <div className="grid gap-4 md:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] md:grid-rows-2 md:gap-5">
+        <div className="grid gap-4 md:h-[680px] md:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] md:grid-rows-2 md:gap-5">
           {discoverCards.map((c) => (
             <div
               key={c.tag}
