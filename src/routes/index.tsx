@@ -1,24 +1,324 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import heroVideo from "@/assets/hero-video.mp4";
+import heroPoster from "@/assets/hero-poster.jpg";
+import p11 from "@/assets/jojo-p11.jpg";
+import p17 from "@/assets/jojo-p17.jpg";
+import p19 from "@/assets/jojo-p19.jpg";
+import p1 from "@/assets/jojo-p1.jpg";
+import p12 from "@/assets/jojo-p12.jpg";
+import p15 from "@/assets/jojo-p15.jpg";
+import p16 from "@/assets/jojo-p16.jpg";
+import { SectionHeader } from "@/components/site/SectionHeader";
+import { ProductCard } from "@/components/site/ProductCard";
+import { newProducts, WA_B2B, WA_CATALOG } from "@/lib/data";
+import { useI18n, type TKey } from "@/lib/i18n";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "جوجو ستور | ملابس بالجملة وتوريد B2B للمتاجر" },
+      {
+        name: "description",
+        content:
+          "جوجو ستور — توريد ملابس بالجملة للمتاجر والموزعين: حريمي، رجالي، أطفال، هوم وير وكاجوال بجودة عالية وأسعار تنافسية.",
+      },
+      { property: "og:title", content: "جوجو ستور | ملابس بالجملة وتوريد B2B" },
+      {
+        property: "og:description",
+        content:
+          "أناقة عالمية، جودة موثوقة، وأسعار تنافسية تجعل جوجو ستور خيارك الأول للتوريد التجاري.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: Home,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+const discoverCards = [
+  { image: p11, tag: "NEW COLLECTION", key: "discover.card1" as TKey },
+  { image: p17, tag: "JOJO EDIT", key: "discover.card2" as TKey },
+  { image: p19, tag: "ALL SIZES", key: "discover.card3" as TKey },
+];
+
+const pillars = [1, 2, 3] as const;
+const stages = [
+  { image: p1, n: 1 },
+  { image: p15, n: 2 },
+  { image: p12, n: 3 },
+  { image: p16, n: 4 },
+];
+const b2bPoints = [1, 2, 3, 4, 5, 6] as const;
+
+function Home() {
+  const { t, lang } = useI18n();
+  const Arrow = lang === "ar" ? ArrowLeft : ArrowRight;
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div>
+      {/* Hero */}
+      <section className="relative flex min-h-[100svh] items-center overflow-hidden">
+        <video
+          src={heroVideo}
+          poster={heroPoster}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="hero-zoom absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="hero-overlay absolute inset-0" />
+
+        <div className="relative mx-auto w-full max-w-6xl px-4 py-28 text-center">
+          <span
+            className="hero-rise inline-block rounded-full border border-white/25 bg-white/10 px-5 py-1.5 text-xs font-bold tracking-[0.2em] text-white backdrop-blur-md"
+            style={{ animationDelay: "0.05s" }}
+          >
+            {t("hero.kicker")}
+          </span>
+          <h1
+            className="hero-rise mx-auto mt-6 max-w-4xl font-heading text-4xl font-extrabold leading-[1.15] text-white drop-shadow-lg md:text-6xl lg:text-7xl"
+            style={{ animationDelay: "0.15s" }}
+          >
+            {t("hero.title")}
+          </h1>
+          <p
+            className="hero-rise mx-auto mt-6 max-w-2xl text-base text-white/85 md:text-lg"
+            style={{ animationDelay: "0.25s" }}
+          >
+            {t("hero.subtitle")}
+          </p>
+
+          <div
+            className="hero-rise mt-9 flex flex-wrap justify-center gap-3"
+            style={{ animationDelay: "0.35s" }}
+          >
+            <Link
+              to="/b2b"
+              className="rounded-full bg-primary px-8 py-3.5 text-sm font-bold text-primary-foreground shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90"
+            >
+              {t("nav.cta")}
+            </Link>
+            <Link
+              to="/catalog"
+              className="rounded-full border border-white/40 bg-white/10 px-8 py-3.5 text-sm font-bold text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/20"
+            >
+              {t("common.browseCatalog")}
+            </Link>
+          </div>
+
+          <div
+            className="hero-rise mx-auto mt-14 grid max-w-3xl gap-4 sm:grid-cols-3"
+            style={{ animationDelay: "0.45s" }}
+          >
+            {[
+              { v: "20+", k: "hero.stat1" as TKey },
+              { v: "200%+", k: "hero.stat2" as TKey },
+              { v: "B2B", k: "hero.stat3" as TKey },
+            ].map((s) => (
+              <div
+                key={s.v}
+                className="rounded-3xl border border-white/20 bg-white/10 p-6 backdrop-blur-md transition-colors duration-300 hover:bg-white/15"
+              >
+                <p className="font-heading text-3xl font-extrabold text-white">
+                  {s.v}
+                </p>
+                <p className="mt-1 text-xs text-white/75">{t(s.k)}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+      {/* Discover */}
+      <section className="mx-auto max-w-6xl px-4 py-16">
+        <SectionHeader
+          kicker={t("discover.kicker")}
+          title={t("discover.title")}
+          subtitle={t("discover.subtitle")}
+        />
+        <div className="grid gap-5 md:grid-cols-3">
+          {discoverCards.map((c) => (
+            <Link
+              key={c.tag}
+              to="/catalog"
+              className="group relative overflow-hidden rounded-3xl"
+            >
+              <img
+                src={c.image}
+                alt={t(c.key)}
+                loading="lazy"
+                className="aspect-[3/4] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/10 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-6 text-start text-white">
+                <span className="text-[11px] font-bold tracking-widest opacity-80">
+                  {c.tag}
+                </span>
+                <p className="font-heading text-xl font-extrabold">
+                  {t(c.key)}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Pillars */}
+      <section className="bg-cream py-16">
+        <div className="mx-auto grid max-w-6xl gap-5 px-4 md:grid-cols-3">
+          {pillars.map((n) => (
+            <div
+              key={n}
+              className="rounded-3xl bg-card p-7 ring-1 ring-border"
+            >
+              <span className="font-heading text-sm font-extrabold text-sand">
+                0{n}
+              </span>
+              <h3 className="mt-3 font-heading text-xl font-extrabold">
+                {t(`pillars.${n}.title` as TKey)}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                {t(`pillars.${n}.body` as TKey)}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Stages */}
+      <section className="mx-auto max-w-6xl px-4 py-16">
+        <SectionHeader
+          kicker={t("stages.kicker")}
+          title={t("stages.title")}
+          subtitle={t("stages.subtitle")}
+        />
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {stages.map((s) => (
+            <div
+              key={s.n}
+              className="overflow-hidden rounded-3xl bg-card ring-1 ring-border"
+            >
+              <img
+                src={s.image}
+                alt={t(`stages.${s.n}.title` as TKey)}
+                loading="lazy"
+                className="aspect-[4/3] w-full object-cover"
+              />
+              <div className="p-6">
+                <span className="font-heading text-sm font-extrabold text-sand">
+                  0{s.n}
+                </span>
+                <h3 className="mt-2 font-heading text-lg font-extrabold">
+                  {t(`stages.${s.n}.title` as TKey)}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {t(`stages.${s.n}.body` as TKey)}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* B2B */}
+      <section className="bg-cream py-16">
+        <div className="mx-auto max-w-6xl px-4">
+          <SectionHeader
+            kicker={t("b2b.kicker")}
+            title={t("b2b.title")}
+            subtitle={t("b2b.subtitle")}
+          />
+          <div className="grid gap-8 lg:grid-cols-2">
+            <ul className="space-y-3">
+              {b2bPoints.map((n) => (
+                <li
+                  key={n}
+                  className="flex items-start gap-3 rounded-2xl bg-card p-4 ring-1 ring-border"
+                >
+                  <Check className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                  <span className="text-sm leading-relaxed">
+                    {t(`b2b.point${n}` as TKey)}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <div className="flex flex-col justify-center gap-4 rounded-3xl bg-card p-8 ring-1 ring-border">
+              <h3 className="font-heading text-2xl font-extrabold">
+                {t("b2b.formTitle")}
+              </h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                {t("b2b.formBody")}
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href={WA_B2B}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full bg-primary px-7 py-3 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  {t("nav.cta")}
+                </a>
+                <Link
+                  to="/story"
+                  className="flex items-center gap-2 rounded-full border border-border px-7 py-3 text-sm font-bold transition-colors hover:bg-muted"
+                >
+                  {t("common.knowStory")}
+                  <Arrow className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Catalog preview */}
+      <section className="mx-auto max-w-6xl px-4 py-16">
+        <SectionHeader
+          kicker={t("catalog.kicker")}
+          title={t("catalog.title")}
+          subtitle={t("catalog.subtitle")}
+          linkTo="/catalog"
+          linkLabel={t("common.browseCatalogFull")}
+        />
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {newProducts.slice(0, 6).map((p) => (
+            <ProductCard key={p.code} product={p} />
+          ))}
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="mx-auto max-w-6xl px-4 pb-8">
+        <div className="rounded-4xl bg-charcoal px-6 py-14 text-center text-white">
+          <h2 className="mx-auto max-w-2xl font-heading text-3xl font-extrabold md:text-4xl">
+            {t("cta.title")}
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-sm text-white/70">
+            {t("cta.body")}
+          </p>
+          <div className="mt-7 flex flex-wrap justify-center gap-3">
+            <a
+              href={WA_B2B}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full bg-white px-7 py-3 text-sm font-bold text-charcoal transition-transform hover:scale-105"
+            >
+              {t("nav.cta")}
+            </a>
+            <a
+              href={WA_CATALOG}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full border border-white/30 px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-white/10"
+            >
+              {t("common.whatsapp")}
+            </a>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
