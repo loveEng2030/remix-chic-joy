@@ -2,9 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import heroVideo from "@/assets/hero-video.mp4";
 import heroPoster from "@/assets/hero-poster.jpg";
-import discoverNew from "@/assets/jojo-discover-new.jpg";
-import discoverEdit from "@/assets/jojo-discover-edit.jpg";
-import discoverSizes from "@/assets/jojo-discover-sizes.jpg";
+import discoverNew from "@/assets/jojo-editorial-main.jpg";
+import discoverEdit from "@/assets/jojo-editorial-edit.jpg";
+import discoverSizes from "@/assets/jojo-editorial-craft.jpg";
 import stageDesign from "@/assets/jojo-stage-design.jpg";
 import stageFabric from "@/assets/jojo-stage-fabric.jpg";
 import stageCutting from "@/assets/jojo-stage-cutting.jpg";
@@ -154,7 +154,7 @@ function Home() {
                 <span className="sr-only">{t("common.viewImage")}</span>
                 <ImageZoomHint />
               </Button>
-              <img src={c.image} alt={t(c.key)} loading="lazy" width={1024} height={1376} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <img src={c.image} alt={t(c.key)} loading="lazy" width={1536} height={1024} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/10 to-transparent" />
               <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 p-6 text-start text-white">
                 <span className="text-[11px] font-bold tracking-widest opacity-80">
