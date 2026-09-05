@@ -98,27 +98,28 @@ export interface Product {
   colors: string[];
   sizes: string[];
   image: string;
+  colorImages?: Partial<Record<string, string>>;
   isNew: boolean;
 }
 
 export const products: Product[] = [
-  { code: "W-101", name: "طقم تراك حريمي هودي وبنطلون", nameEn: "Women hoodie and joggers tracksuit", categoryId: "women", category: "ملابس حريمي", colors: ["بمبي", "أسود"], sizes: ["12", "14", "16", "18"], image: p1, isNew: true },
+  { code: "W-101", name: "طقم تراك حريمي سويت شيرت وبنطلون", nameEn: "Women sweatshirt and trousers tracksuit", categoryId: "women", category: "ملابس حريمي", colors: ["بمبي", "لبني", "نبيتي", "لافندر"], sizes: ["12", "14", "16", "18"], image: p1, colorImages: { "بمبي": p1, "لبني": p10, "نبيتي": p11, "لافندر": p3 }, isNew: true },
   { code: "W-102", name: "طقم هودي حريمي لافندر", nameEn: "Women lavender hoodie set", categoryId: "women", category: "ملابس حريمي", colors: ["لافندر", "أسود"], sizes: ["12", "14", "16", "18"], image: p3, isNew: true },
   { code: "W-103", name: "سويت شيرت حريمي وبنطلون لبني", nameEn: "Women light blue sweatshirt and trousers", categoryId: "women", category: "ملابس حريمي", colors: ["لبني", "كحلي"], sizes: ["12", "14", "16", "18"], image: p10, isNew: false },
   { code: "W-104", name: "طقم رياضي حريمي بخطوط جانبية", nameEn: "Women sports set with side stripes", categoryId: "women", category: "ملابس حريمي", colors: ["بمبي", "أسود"], sizes: ["12", "14", "16", "18"], image: p11, isNew: false },
-  { code: "K-201", name: "تيشيرت وليجن شتوي أطفال قماش دافئ", nameEn: "Kids warm winter t-shirt and leggings", categoryId: "kids", category: "ملابس أطفال", colors: ["بني", "كحلي"], sizes: ["3", "4", "5", "6", "7"], image: p2, isNew: true },
+  { code: "K-201", name: "طقم سويت شيرت وبنطلون أطفال بطبعة", nameEn: "Kids printed sweatshirt and trousers set", categoryId: "kids", category: "ملابس أطفال", colors: ["بني", "كحلي"], sizes: ["3", "4", "5", "6", "7"], image: p2, isNew: true },
   { code: "K-202", name: "تيشيرت وليجن شتوي مقلم دينو", nameEn: "Kids striped dino winter t-shirt and leggings", categoryId: "kids", category: "ملابس أطفال", colors: ["أوف وايت", "زيتي"], sizes: ["3", "4", "5", "6", "7"], image: p7, isNew: true },
   { code: "K-203", name: "سويت شيرت أطفال مقلم وبنطلون كارجو", nameEn: "Kids striped sweatshirt and cargo trousers", categoryId: "kids", category: "ملابس أطفال", colors: ["لبني", "كحلي"], sizes: ["3", "4", "5", "6", "7"], image: p4, isNew: false },
   { code: "K-204", name: "طقم جاكت سبايدي بسحاب وبنطلون", nameEn: "Kids Spidey zip jacket and trousers set", categoryId: "kids", category: "ملابس أطفال", colors: ["كحلي", "أحمر"], sizes: ["6", "8", "10", "12"], image: p5, isNew: true },
   { code: "K-205", name: "طقم جاكت باتمان بسحاب وكارجو", nameEn: "Kids Batman zip jacket and cargo set", categoryId: "kids", category: "ملابس أطفال", colors: ["رمادي", "أسود"], sizes: ["6", "8", "10", "12"], image: p8, isNew: false },
   { code: "K-206", name: "طقم جاكت سبيد بسحاب وبنطلون", nameEn: "Kids Speed zip jacket and trousers set", categoryId: "kids", category: "ملابس أطفال", colors: ["أزرق", "رمادي"], sizes: ["6", "8", "10", "12"], image: p9, isNew: false },
   { code: "K-207", name: "طقم جاكت دينو بيج وكارجو زيتي", nameEn: "Kids beige dino jacket and olive cargo", categoryId: "kids", category: "ملابس أطفال", colors: ["بيج", "زيتي"], sizes: ["6", "8", "10", "12"], image: p12, isNew: false },
-  { code: "K-208", name: "أطقم تراك أطفال بناتي وأولادي", nameEn: "Kids tracksuits for boys and girls", categoryId: "kids", category: "ملابس أطفال", colors: ["زيتي", "نبيتي", "كحلي"], sizes: ["6", "8", "10", "12", "14"], image: p17, isNew: true },
-  { code: "K-209", name: "جاكيتات وسويت شيرت أطفال شتوي", nameEn: "Kids winter jackets and sweatshirts", categoryId: "kids", category: "ملابس أطفال", colors: ["بيج", "زيتي", "أوف وايت"], sizes: ["4", "6", "8", "10", "12"], image: p21, isNew: false },
-  { code: "M-301", name: "جاكت شتوي رجالي وبنطلون جينز", nameEn: "Men winter jacket and denim trousers", categoryId: "men", category: "ملابس رجالي", colors: ["أسود", "بيج", "بني"], sizes: ["M", "L", "XL", "2XL"], image: p16, isNew: true },
-  { code: "H-401", name: "بيجامات أطفال قطن مطبوعة", nameEn: "Kids printed cotton pyjamas", categoryId: "homewear", category: "هوم وير", colors: ["أصفر", "بيج", "مشكل"], sizes: ["1", "2", "3", "4"], image: p15, isNew: true },
+  { code: "K-208", name: "بيجامات بناتي شتوية مطبوعة", nameEn: "Girls printed winter pyjamas", categoryId: "kids", category: "ملابس أطفال", colors: ["لافندر", "لبني", "أوف وايت"], sizes: ["6", "8", "10", "12", "14"], image: p17, isNew: true },
+  { code: "K-209", name: "تشكيلة أطقم أطفال متنوعة", nameEn: "Assorted kids coordinated sets", categoryId: "kids", category: "ملابس أطفال", colors: ["بيج", "زيتي", "أوف وايت"], sizes: ["4", "6", "8", "10", "12"], image: p21, isNew: false },
+  { code: "M-301", name: "أطقم تراك رجالي شتوية", nameEn: "Men winter tracksuit sets", categoryId: "men", category: "ملابس رجالي", colors: ["أسود", "نبيتي", "كحلي"], sizes: ["M", "L", "XL", "2XL"], image: p16, isNew: true },
+  { code: "H-401", name: "تشكيلة أطقم شتوية متنوعة", nameEn: "Assorted winter coordinated sets", categoryId: "homewear", category: "هوم وير", colors: ["بني", "أسود", "بيج"], sizes: ["M", "L", "XL", "2XL"], image: p15, isNew: true },
   { code: "H-402", name: "بيجامات بناتي شخصيات كرتونية", nameEn: "Girls cartoon character pyjamas", categoryId: "homewear", category: "هوم وير", colors: ["لبني", "بمبي", "أوف وايت"], sizes: ["4", "6", "8", "10"], image: p18, isNew: false },
-  { code: "C-501", name: "أطقم هودي وسويت بانت كاجوال", nameEn: "Casual hoodie and sweatpants sets", categoryId: "casual", category: "كاجوال", colors: ["نبيتي", "منت", "أزرق"], sizes: ["M", "L", "XL", "2XL"], image: p19, isNew: true },
+  { code: "C-501", name: "تشكيلة كاجوال صيفية للعائلة", nameEn: "Family summer casual collection", categoryId: "casual", category: "كاجوال", colors: ["أزرق", "أصفر", "بمبي"], sizes: ["مشكل"], image: p19, isNew: true },
 ];
 
 export const allColors = [

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { X, ZoomIn } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface ImageLightboxProps {
   src: string;
@@ -33,15 +34,17 @@ export function ImageLightbox({ src, alt, open, onOpenChange }: ImageLightboxPro
       aria-label={alt}
       onClick={() => onOpenChange(false)}
     >
-      <button
+      <Button
         type="button"
         onClick={() => onOpenChange(false)}
-        className="absolute end-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-card text-foreground shadow-lg transition-transform hover:scale-105"
+        variant="secondary"
+        size="icon"
+        className="absolute end-4 top-4 h-11 w-11 rounded-full shadow-lg transition-transform hover:scale-105"
         aria-label="إغلاق الصورة"
         title="إغلاق"
       >
         <X className="h-5 w-5" />
-      </button>
+      </Button>
       <img
         src={src}
         alt={alt}
