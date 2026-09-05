@@ -170,7 +170,7 @@ function Home() {
       </section>
 
       {/* Pillars */}
-      <section className="bg-cream py-16">
+      <section className="cv-auto bg-cream py-16">
         <div className="mx-auto grid max-w-6xl gap-5 px-4 md:grid-cols-3">
           {pillars.map((n) => (
             <div
@@ -192,7 +192,7 @@ function Home() {
       </section>
 
       {/* Stages */}
-      <section className="mx-auto max-w-6xl px-4 py-16">
+      <section className="cv-auto mx-auto max-w-6xl px-4 py-16">
         <SectionHeader
           kicker={t("stages.kicker")}
           title={t("stages.title")}
@@ -227,7 +227,7 @@ function Home() {
       </section>
 
       {/* B2B */}
-      <section className="bg-cream py-16">
+      <section className="cv-auto bg-cream py-16">
         <div className="mx-auto max-w-6xl px-4">
           <SectionHeader
             kicker={t("b2b.kicker")}
@@ -278,7 +278,7 @@ function Home() {
       </section>
 
       {/* Catalog preview */}
-      <section className="mx-auto max-w-6xl px-4 py-16">
+      <section className="cv-auto mx-auto max-w-6xl px-4 py-16">
         <SectionHeader
           kicker={t("catalog.kicker")}
           title={t("catalog.title")}
@@ -294,7 +294,7 @@ function Home() {
       </section>
 
       {/* CTA */}
-      <section className="mx-auto max-w-6xl px-4 pb-8">
+      <section className="cv-auto mx-auto max-w-6xl px-4 pb-8">
         <div className="rounded-4xl bg-charcoal px-6 py-14 text-center text-white">
           <h2 className="mx-auto max-w-2xl font-heading text-3xl font-extrabold md:text-4xl">
             {t("cta.title")}
