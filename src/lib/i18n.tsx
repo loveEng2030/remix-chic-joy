@@ -35,6 +35,8 @@ const dict = {
   "common.orderNow": ["تواصل للطلب", "Contact to order"],
   "common.available": ["متاح", "Available"],
   "common.new": ["جديد", "New"],
+  "common.viewImage": ["عرض الصورة كاملة", "View full image"],
+  "common.showColor": ["عرض اللون", "Show colour"],
   "common.knowStory": ["اعرف قصتنا", "Read our story"],
   "common.quickLinks": ["روابط سريعة", "Quick links"],
   "common.contactUs": ["تواصل معنا", "Contact us"],
@@ -73,7 +75,7 @@ const dict = {
   ],
   "discover.card1": ["التشكيلة الجديدة", "The new collection"],
   "discover.card2": ["اختيارات مميزة", "Featured picks"],
-  "discover.card3": ["أناقة بملاءمة مرنة", "Elegance with a flexible fit"],
+  "discover.card3": ["مقاسات لكل مرحلة", "Sizes for every stage"],
 
   "pillars.1.title": ["جودة تبدأ من التفاصيل", "Quality starts with detail"],
   "pillars.1.body": [
@@ -112,7 +114,7 @@ const dict = {
     "دقة في المقاسات والباترون قبل الإنتاج لضمان ثبات الجودة.",
     "Accurate sizing and patterns before production to keep quality consistent.",
   ],
-  "stages.4.title": ["التجهيز والتشطيب", "Finishing & packing"],
+  "stages.4.title": ["الخياطة والتشطيب", "Sewing & finishing"],
   "stages.4.body": [
     "تجهيز منظم يراعي التفاصيل، الراحة، وشكل المنتج النهائي.",
     "Organised finishing that respects detail, comfort and the final look.",

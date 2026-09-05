@@ -12,7 +12,10 @@ import stageProduction from "@/assets/jojo-stage-production.jpg";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { ProductCard } from "@/components/site/ProductCard";
 import { newProducts, WA_B2B, WA_CATALOG } from "@/lib/data";
+import { useState } from "react";
 import { useI18n, type TKey } from "@/lib/i18n";
+import { Button } from "@/components/ui/button";
+import { ImageLightbox, ImageZoomHint } from "@/components/site/ImageLightbox";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -54,6 +57,7 @@ const b2bPoints = [1, 2, 3, 4, 5, 6] as const;
 function Home() {
   const { t, lang } = useI18n();
   const Arrow = lang === "ar" ? ArrowLeft : ArrowRight;
+  const [preview, setPreview] = useState<{ src: string; alt: string } | null>(null);
 
   return (
     <div>
@@ -141,21 +145,23 @@ function Home() {
         />
         <div className="grid gap-5 md:grid-cols-3">
           {discoverCards.map((c) => (
-            <Link
+            <div
               key={c.tag}
-              to="/catalog"
               className="group relative overflow-hidden rounded-3xl"
             >
-              <img
-                src={c.image}
-                alt={t(c.key)}
-                loading="lazy"
-                width={1024}
-                height={1376}
-                className="aspect-[3/4] w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={() => setPreview({ src: c.image, alt: t(c.key) })}
+                className="absolute inset-0 z-10 h-full w-full rounded-none p-0"
+                aria-label={`${t("common.viewImage")} — ${t(c.key)}`}
+              >
+                <span className="sr-only">{t("common.viewImage")}</span>
+                <ImageZoomHint />
+              </Button>
+              <img src={c.image} alt={t(c.key)} loading="lazy" width={1024} height={1376} className="aspect-[3/4] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/10 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-6 text-start text-white">
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 p-6 text-start text-white">
                 <span className="text-[11px] font-bold tracking-widest opacity-80">
                   {c.tag}
                 </span>
@@ -163,7 +169,7 @@ function Home() {
                   {t(c.key)}
                 </p>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </section>
@@ -201,16 +207,14 @@ function Home() {
           {stages.map((s) => (
             <div
               key={s.n}
-              className="overflow-hidden rounded-3xl bg-card ring-1 ring-border"
+              className="group overflow-hidden rounded-3xl bg-card ring-1 ring-border"
             >
-              <img
-                src={s.image}
-                alt={t(`stages.${s.n}.title` as TKey)}
-                loading="lazy"
-                width={1024}
-                height={768}
-                className="aspect-[4/3] w-full object-cover"
-              />
+              <div className="relative">
+                <Button type="button" variant="ghost" onClick={() => setPreview({ src: s.image, alt: t(`stages.${s.n}.title` as TKey) })} className="absolute inset-0 z-10 h-full w-full rounded-none p-0" aria-label={`${t("common.viewImage")} — ${t(`stages.${s.n}.title` as TKey)}`}>
+                  <span className="sr-only">{t("common.viewImage")}</span><ImageZoomHint />
+                </Button>
+                <img src={s.image} alt={t(`stages.${s.n}.title` as TKey)} loading="lazy" width={1024} height={768} className="aspect-[4/3] w-full object-cover" />
+              </div>
               <div className="p-6">
                 <span className="font-heading text-sm font-extrabold text-sand">
                   0{s.n}
@@ -323,6 +327,7 @@ function Home() {
           </div>
         </div>
       </section>
+      <ImageLightbox src={preview?.src ?? ""} alt={preview?.alt ?? ""} open={preview !== null} onOpenChange={(open) => { if (!open) setPreview(null); }} />
     </div>
   );
 }

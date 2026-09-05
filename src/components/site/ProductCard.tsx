@@ -1,22 +1,38 @@
+import { useState } from "react";
 import { BadgeCheck } from "lucide-react";
 import { categories, colorHex, productWaLink, type Product } from "@/lib/data";
 import { useI18n } from "@/lib/i18n";
+import { Button } from "@/components/ui/button";
+import { ImageLightbox, ImageZoomHint } from "@/components/site/ImageLightbox";
 
 export function ProductCard({ product }: { product: Product }) {
   const { t, tx, tColor } = useI18n();
   const cat = categories.find((c) => c.id === product.categoryId);
   const name = tx(product.name, product.nameEn);
+  const [selectedColor, setSelectedColor] = useState(product.colors[0] ?? "");
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const selectedImage = product.colorImages?.[selectedColor] ?? product.image;
 
   return (
     <article className="group overflow-hidden rounded-3xl bg-card ring-1 ring-border transition-shadow hover:shadow-xl hover:shadow-foreground/5">
       <div className="relative aspect-[4/5] overflow-hidden">
+        <Button
+          type="button"
+          variant="ghost"
+          onClick={() => setLightboxOpen(true)}
+          className="group absolute inset-0 z-0 h-full w-full rounded-none p-0"
+          aria-label={`${t("common.viewImage")} — ${name}`}
+        >
         <img
-          src={product.image}
+          key={selectedImage}
+          src={selectedImage}
           alt={name}
           loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
         />
-        <div className="absolute end-3 top-3 flex gap-2">
+          <ImageZoomHint />
+        </Button>
+        <div className="pointer-events-none absolute end-3 top-3 z-10 flex gap-2">
           <span className="rounded-full bg-card/95 px-3 py-1 text-xs font-bold text-foreground ring-1 ring-border">
             Code {product.code.split("-")[1]}
           </span>
@@ -42,16 +58,23 @@ export function ProductCard({ product }: { product: Product }) {
 
         <div className="flex flex-wrap gap-1.5">
           {product.colors.map((c) => (
-            <span
+            <Button
               key={c}
-              className="flex items-center gap-1.5 rounded-full border border-border px-2.5 py-1 text-xs text-muted-foreground"
+              type="button"
+              variant="outline"
+              onClick={() => setSelectedColor(c)}
+              aria-pressed={selectedColor === c}
+              title={product.colorImages?.[c] ? `${t("common.showColor")} ${tColor(c)}` : tColor(c)}
+              className={`h-8 rounded-full px-2.5 text-xs ${
+                selectedColor === c ? "border-primary bg-primary/10 text-primary ring-1 ring-primary" : "text-muted-foreground"
+              }`}
             >
               <span
                 className="h-3.5 w-3.5 rounded-full ring-1 ring-border"
                 style={{ backgroundColor: colorHex[c] ?? "#ddd" }}
               />
               {tColor(c)}
-            </span>
+            </Button>
           ))}
         </div>
 
@@ -82,6 +105,12 @@ export function ProductCard({ product }: { product: Product }) {
           </span>
         </div>
       </div>
+      <ImageLightbox
+        src={selectedImage}
+        alt={`${name} — ${tColor(selectedColor)}`}
+        open={lightboxOpen}
+        onOpenChange={setLightboxOpen}
+      />
     </article>
   );
 }
