@@ -2,13 +2,13 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import heroVideo from "@/assets/hero-video.mp4";
 import heroPoster from "@/assets/hero-poster.jpg";
-import p11 from "@/assets/jojo-p11.jpg";
-import p17 from "@/assets/jojo-p17.jpg";
-import p19 from "@/assets/jojo-p19.jpg";
-import p1 from "@/assets/jojo-p1.jpg";
-import p12 from "@/assets/jojo-p12.jpg";
-import p15 from "@/assets/jojo-p15.jpg";
-import p16 from "@/assets/jojo-p16.jpg";
+import discoverNew from "@/assets/jojo-discover-new.jpg";
+import discoverEdit from "@/assets/jojo-discover-edit.jpg";
+import discoverSizes from "@/assets/jojo-discover-sizes.jpg";
+import stageDesign from "@/assets/jojo-stage-design.jpg";
+import stageFabric from "@/assets/jojo-stage-fabric.jpg";
+import stageCutting from "@/assets/jojo-stage-cutting.jpg";
+import stageProduction from "@/assets/jojo-stage-production.jpg";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { ProductCard } from "@/components/site/ProductCard";
 import { newProducts, WA_B2B, WA_CATALOG } from "@/lib/data";
@@ -37,17 +37,17 @@ export const Route = createFileRoute("/")({
 });
 
 const discoverCards = [
-  { image: p11, tag: "NEW COLLECTION", key: "discover.card1" as TKey },
-  { image: p17, tag: "JOJO EDIT", key: "discover.card2" as TKey },
-  { image: p19, tag: "ALL SIZES", key: "discover.card3" as TKey },
+  { image: discoverNew, tag: "NEW COLLECTION", key: "discover.card1" as TKey },
+  { image: discoverEdit, tag: "JOJO EDIT", key: "discover.card2" as TKey },
+  { image: discoverSizes, tag: "ALL SIZES", key: "discover.card3" as TKey },
 ];
 
 const pillars = [1, 2, 3] as const;
 const stages = [
-  { image: p1, n: 1 },
-  { image: p15, n: 2 },
-  { image: p12, n: 3 },
-  { image: p16, n: 4 },
+  { image: stageDesign, n: 1 },
+  { image: stageFabric, n: 2 },
+  { image: stageCutting, n: 3 },
+  { image: stageProduction, n: 4 },
 ];
 const b2bPoints = [1, 2, 3, 4, 5, 6] as const;
 
@@ -150,6 +150,8 @@ function Home() {
                 src={c.image}
                 alt={t(c.key)}
                 loading="lazy"
+                width={1024}
+                height={1376}
                 className="aspect-[3/4] w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/10 to-transparent" />
@@ -205,6 +207,8 @@ function Home() {
                 src={s.image}
                 alt={t(`stages.${s.n}.title` as TKey)}
                 loading="lazy"
+                width={1024}
+                height={768}
                 className="aspect-[4/3] w-full object-cover"
               />
               <div className="p-6">
