@@ -40,9 +40,9 @@ export const Route = createFileRoute("/")({
 });
 
 const discoverCards = [
-  { image: discoverNew, tag: "NEW COLLECTION", key: "discover.card1" as TKey },
-  { image: discoverEdit, tag: "JOJO EDIT", key: "discover.card2" as TKey },
-  { image: discoverSizes, tag: "ALL SIZES", key: "discover.card3" as TKey },
+  { image: discoverNew, tag: "NEW COLLECTION", key: "discover.card1" as TKey, layout: "md:col-start-2 md:row-span-2" },
+  { image: discoverEdit, tag: "JOJO EDIT", key: "discover.card2" as TKey, layout: "md:col-start-1 md:row-start-1" },
+  { image: discoverSizes, tag: "ALL SIZES", key: "discover.card3" as TKey, layout: "md:col-start-1 md:row-start-2" },
 ];
 
 const pillars = [1, 2, 3] as const;
@@ -137,17 +137,12 @@ function Home() {
 
 
       {/* Discover */}
-      <section className="mx-auto max-w-6xl px-4 py-16">
-        <SectionHeader
-          kicker={t("discover.kicker")}
-          title={t("discover.title")}
-          subtitle={t("discover.subtitle")}
-        />
-        <div className="grid gap-5 md:grid-cols-3">
+      <section className="mx-auto max-w-6xl px-4 py-5 md:py-7">
+        <div className="grid gap-4 md:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] md:grid-rows-2 md:gap-5">
           {discoverCards.map((c) => (
             <div
               key={c.tag}
-              className="group relative overflow-hidden rounded-3xl"
+              className={`group relative min-h-[280px] overflow-hidden rounded-3xl md:min-h-0 ${c.layout}`}
             >
               <Button
                 type="button"
@@ -159,7 +154,7 @@ function Home() {
                 <span className="sr-only">{t("common.viewImage")}</span>
                 <ImageZoomHint />
               </Button>
-              <img src={c.image} alt={t(c.key)} loading="lazy" width={1024} height={1376} className="aspect-[3/4] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <img src={c.image} alt={t(c.key)} loading="lazy" width={1024} height={1376} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/10 to-transparent" />
               <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 p-6 text-start text-white">
                 <span className="text-[11px] font-bold tracking-widest opacity-80">
