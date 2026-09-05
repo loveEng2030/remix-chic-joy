@@ -199,3 +199,9 @@
 @utility hero-zoom {
   animation: hero-zoom 14s ease-out both;
 }
+
+/* Skip rendering off-screen sections until they are near the viewport */
+@utility cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 640px;
+}
