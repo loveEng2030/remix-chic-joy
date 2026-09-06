@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Phone, MapPin } from "lucide-react";
+import { Phone, MapPin, Lock } from "lucide-react";
 import logo from "@/assets/jojo-logo.png";
 import { ADDRESS, ADDRESS_EN, PHONE, WA_DEFAULT } from "@/lib/data";
 import { useI18n, type TKey } from "@/lib/i18n";
@@ -85,9 +85,18 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-border py-5 text-center text-xs text-muted-foreground">
-        {t("footer.rights")}
+      <div className="flex items-center justify-center gap-3 border-t border-border py-5 text-center text-xs text-muted-foreground">
+        <span>{t("footer.rights")}</span>
+        <Link
+          to="/admin"
+          aria-label="Admin"
+          title="Admin"
+          className="rounded-full p-1.5 text-muted-foreground/50 transition-colors hover:bg-muted hover:text-primary"
+        >
+          <Lock className="h-3.5 w-3.5" />
+        </Link>
       </div>
+
     </footer>
   );
 }
