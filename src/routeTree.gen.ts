@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as B2bRouteImport } from './routes/b2b'
 import { Route as CatalogRouteImport } from './routes/catalog'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -19,6 +20,11 @@ import { Route as StoryRouteImport } from './routes/story'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const B2bRoute = B2bRouteImport.update({
@@ -49,6 +55,7 @@ const StoryRoute = StoryRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/b2b': typeof B2bRoute
   '/catalog': typeof CatalogRoute
   '/contact': typeof ContactRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/b2b': typeof B2bRoute
   '/catalog': typeof CatalogRoute
   '/contact': typeof ContactRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/b2b': typeof B2bRoute
   '/catalog': typeof CatalogRoute
   '/contact': typeof ContactRoute
@@ -74,14 +83,24 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/b2b' | '/catalog' | '/contact' | '/faq' | '/story'
+  fullPaths:
+    '/' | '/admin' | '/b2b' | '/catalog' | '/contact' | '/faq' | '/story'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/b2b' | '/catalog' | '/contact' | '/faq' | '/story'
-  id: '__root__' | '/' | '/b2b' | '/catalog' | '/contact' | '/faq' | '/story'
+  to: '/' | '/admin' | '/b2b' | '/catalog' | '/contact' | '/faq' | '/story'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/b2b'
+    | '/catalog'
+    | '/contact'
+    | '/faq'
+    | '/story'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   B2bRoute: typeof B2bRoute
   CatalogRoute: typeof CatalogRoute
   ContactRoute: typeof ContactRoute
@@ -96,6 +115,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/b2b': {
@@ -138,6 +164,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   B2bRoute: B2bRoute,
   CatalogRoute: CatalogRoute,
   ContactRoute: ContactRoute,
