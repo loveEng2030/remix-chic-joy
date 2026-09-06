@@ -10,6 +10,8 @@ import {
 } from "@/lib/data";
 
 import { useI18n } from "@/lib/i18n";
+import { useDbProducts } from "@/lib/catalog";
+
 
 export const Route = createFileRoute("/catalog")({
   head: () => ({
@@ -34,13 +36,15 @@ export const Route = createFileRoute("/catalog")({
 
 function CatalogPage() {
   const { t, tx, tColor } = useI18n();
+  const { data: dbItems } = useDbProducts();
   const [cat, setCat] = useState<string>("all");
   const [color, setColor] = useState<string>("all");
   const [q, setQ] = useState("");
   const [newOnly, setNewOnly] = useState(false);
 
+  const all = [...(dbItems ?? []).map((d) => d.product), ...products];
   const query = q.trim().toLowerCase();
-  const list = products.filter(
+  const list = all.filter(
     (p) =>
       (cat === "all" || p.categoryId === cat) &&
       (color === "all" || p.colors.includes(color)) &&
@@ -50,6 +54,7 @@ function CatalogPage() {
         p.nameEn.toLowerCase().includes(query) ||
         p.code.toLowerCase().includes(query)),
   );
+
 
   return (
     <div className="mx-auto max-w-6xl px-4 pb-8 pt-32">
